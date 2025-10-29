@@ -30,3 +30,15 @@ def err_control(func):
             return None
     return wrapper
 ############################################################
+def count_model_parameters(model) -> tuple[int, int]:
+    total_params = 0
+    trainable_params = 0
+    
+    for param in model.parameters():
+        param_count = param.numel()
+        total_params += param_count
+        
+        if param.requires_grad:
+            trainable_params += param_count
+    
+    return total_params, trainable_params
